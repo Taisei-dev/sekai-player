@@ -1,5 +1,12 @@
 <template>
-    <div>
-        <h2>game</h2>
-    </div>
+    <Canvas/>
 </template>
+
+<script lang="ts">
+import Canvas from "@/components/Canvas.vue"
+export default {
+    components:{
+        Canvas,
+    },
+}
+</script>

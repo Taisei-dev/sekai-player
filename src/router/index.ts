@@ -7,6 +7,14 @@ const routes = [
     component: () => import("@/views/Home.vue"),
   },
   {
+    path: "/official",
+    component: () => import("@/views/Official.vue"),
+  },
+  {
+    path: "/sonolus",
+    component: () => import("@/views/Sonolus.vue"),
+  },
+  {
     path: "/game",
     component: () => import("@/views/Game.vue"),
   },
