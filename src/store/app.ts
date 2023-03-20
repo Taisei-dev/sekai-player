@@ -26,10 +26,8 @@ export const useAppStore = defineStore("app", {
     showSimLine: true,
     mirror: false,
     //GameLoadConfig
-    mapContentSrc:
-      "https://cors-anywhere-taisei-dev.vercel.app/servers.sonolus.com/pjsekai/sonolus/levels/pjsekai-1-1-master/data",
-    musicSrc:
-      "https://cors-anywhere-taisei-dev.vercel.app/storage.sekai.best/sekai-assets/music/long/0001_01_rip/0001_01.mp3",
+    mapContentSrc: "",
+    musicSrc: "",
     coverSrc: "",
     songName: "Tell Your World - Master",
   }),
@@ -54,7 +52,7 @@ export const useAppStore = defineStore("app", {
     GameLoadConfig: (state) => {
       return {
         mapContent: () => {
-          fetch(state.mapContentSrc)
+          return fetch(state.mapContentSrc)
             .then((res) => res.arrayBuffer())
             .then((buffer) => {
               // @ts-ignore

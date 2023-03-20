@@ -2,7 +2,7 @@
     <v-app>
         <v-app-bar color="primary">
             <v-app-bar-nav-icon @click.stop="drawer=!drawer"></v-app-bar-nav-icon>
-            <v-toolbar-title>Official</v-toolbar-title>
+            <v-toolbar-title>Sonolus</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn icon>
                 <v-icon>mdi-magnify</v-icon>
@@ -17,7 +17,7 @@
           temporary>
             <v-list>
                 <v-list-item to="/">Home</v-list-item>
-                <v-list-item to="/potato">Sweet Potato</v-list-item>
+                <v-list-item to="/official">Official</v-list-item>
             </v-list>
         </v-navigation-drawer>
         <v-main>
@@ -61,7 +61,7 @@ import { useAppStore } from "@/store/app"
 const store=useAppStore()
 function convertProxyURL(url:string){
     const proxyURL="https://cors-anywhere-taisei-dev.vercel.app/"
-    return url.includes('https://')?url.replace("https://",proxyURL):proxyURL+"servers.sonolus.com/pjsekai"+url
+    return url.includes('https://')?url.replace("https://",proxyURL):proxyURL+"servers.purplepalette.net"+url
 }
 export default{
     data:()=>({
@@ -78,7 +78,7 @@ export default{
     },
     methods:{
         getPageNumber(num:number){
-            axios.get('https://cors-anywhere-taisei-dev.vercel.app/servers.sonolus.com/pjsekai/sonolus/levels/list?page='+this.page)
+            axios.get('https://cors-anywhere-taisei-dev.vercel.app/servers.purplepalette.net/sonolus/levels/list?page='+this.page)
             .then(res=>{
                 this.length=res.data.pageCount-1
                 //console.log(res.data.items)
@@ -104,7 +104,7 @@ export default{
         }
     },
     mounted(){
-        axios.get('https://cors-anywhere-taisei-dev.vercel.app/servers.sonolus.com/pjsekai/sonolus/levels/list')
+        axios.get('https://cors-anywhere-taisei-dev.vercel.app/servers.purplepalette.net/sonolus/levels/list')
         .then(res=>{
             this.length=res.data.pageCount-1
             //console.log(res.data.items)
