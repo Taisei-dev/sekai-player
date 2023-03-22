@@ -1,22 +1,22 @@
 // Utilities
-import { defineStore } from "pinia";
+import { defineStore } from 'pinia'
 
 export type Config = {
-  judgeOffset: number;
-  visualOffset: number;
-  speed: number;
-  effectVolume: number;
-  showSimLine: boolean;
-  mirror: boolean;
-};
+  judgeOffset: number
+  visualOffset: number
+  speed: number
+  effectVolume: number
+  showSimLine: boolean
+  mirror: boolean
+}
 export type LoadConfig = {
-  mapContentSrc: string;
-  musicSrc: string;
-  coverSrc: string;
-  songName: string;
-};
+  mapContentSrc: string
+  musicSrc: string
+  coverSrc: string
+  songName: string
+}
 
-export const useAppStore = defineStore("app", {
+export const useAppStore = defineStore('app', {
   state: () => ({
     //GameConfig
     judgeOffset: 0,
@@ -26,10 +26,10 @@ export const useAppStore = defineStore("app", {
     showSimLine: true,
     mirror: false,
     //GameLoadConfig
-    mapContentSrc: "",
-    musicSrc: "",
-    coverSrc: "",
-    songName: "Tell Your World - Master",
+    mapContentSrc: '',
+    musicSrc: '',
+    coverSrc: '',
+    songName: 'Tell Your World - Master',
   }),
   getters: {
     GameConfig: (state) => {
@@ -47,7 +47,7 @@ export const useAppStore = defineStore("app", {
         mirror: state.mirror,
         beatNote: true,
         debug: false,
-      };
+      }
     },
     GameLoadConfig: (state) => {
       return {
@@ -56,42 +56,42 @@ export const useAppStore = defineStore("app", {
             .then((res) => res.arrayBuffer())
             .then((buffer) => {
               // @ts-ignore
-              return new Zlib.Gunzip(new Uint8Array(buffer));
+              return new Zlib.Gunzip(new Uint8Array(buffer))
             })
             .then((gunzip) => {
-              return gunzip.decompress();
+              return gunzip.decompress()
             })
             .then((uint8Arr) => {
-              return JSON.parse(new TextDecoder().decode(uint8Arr));
+              return JSON.parse(new TextDecoder().decode(uint8Arr))
             })
             .then((data) => {
-              console.log(data);
-              return data;
-            });
+              console.log(data)
+              return data
+            })
         },
         musicSrc: state.musicSrc,
-        loadingBackgroundSrc: "/loadBG.png",
-        backgroundSrc: "/liveBG.png",
+        loadingBackgroundSrc: '/loadBG.png',
+        backgroundSrc: '/liveBG.png',
         coverSrc: state.coverSrc,
-        skin: "/sekai",
+        skin: '/sekai',
         songName: state.songName,
-      };
+      }
     },
   },
   actions: {
     setConfig(config: Config) {
-      this.judgeOffset = config.judgeOffset;
-      this.visualOffset = config.visualOffset;
-      this.speed = config.speed;
-      this.effectVolume = config.effectVolume;
-      this.showSimLine = config.showSimLine;
-      this.mirror = config.mirror;
+      this.judgeOffset = config.judgeOffset
+      this.visualOffset = config.visualOffset
+      this.speed = config.speed
+      this.effectVolume = config.effectVolume
+      this.showSimLine = config.showSimLine
+      this.mirror = config.mirror
     },
     setLoadConfig(config: LoadConfig) {
-      this.mapContentSrc = config.mapContentSrc;
-      this.musicSrc = config.musicSrc;
-      this.coverSrc = config.coverSrc;
-      this.songName = config.songName;
+      this.mapContentSrc = config.mapContentSrc
+      this.musicSrc = config.musicSrc
+      this.coverSrc = config.coverSrc
+      this.songName = config.songName
     },
   },
-});
+})

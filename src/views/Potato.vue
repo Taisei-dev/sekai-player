@@ -56,6 +56,7 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import axios from "axios"
 import { useAppStore } from "@/store/app"
 const store=useAppStore()
@@ -78,7 +79,7 @@ export default{
     },
     methods:{
         getPageNumber(num:number){
-            axios.get('https://cors-anywhere-taisei-dev.vercel.app/servers.purplepalette.net/sonolus/levels/list?page='+this.page)
+            axios.get(convertProxyURL('/sonolus/levels/list?page='+this.page))
             .then(res=>{
                 this.length=res.data.pageCount-1
                 //console.log(res.data.items)
@@ -104,7 +105,7 @@ export default{
         }
     },
     mounted(){
-        axios.get('https://cors-anywhere-taisei-dev.vercel.app/servers.purplepalette.net/sonolus/levels/list')
+        axios.get(convertProxyURL('/sonolus/levels/list'))
         .then(res=>{
             this.length=res.data.pageCount-1
             //console.log(res.data.items)

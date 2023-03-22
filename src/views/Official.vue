@@ -6,6 +6,19 @@
             <v-spacer></v-spacer>
             <v-btn icon>
                 <v-icon>mdi-magnify</v-icon>
+                <v-dialog
+                    v-model="dialog"
+                    activator="parent"
+                    width="80%"
+                >
+                    <v-card class="px-8 pt-8">
+                    <v-text-field label="名前">
+                    </v-text-field>
+                    <v-card-actions>
+                        <v-btn color="primary" block @click="Search()">検索</v-btn>
+                    </v-card-actions>
+                    </v-card>
+                </v-dialog>
             </v-btn>
             <v-btn icon>
                 <v-icon>mdi-cog</v-icon>
@@ -56,6 +69,7 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
 import axios from "axios"
 import { useAppStore } from "@/store/app"
 const store=useAppStore()
@@ -66,6 +80,7 @@ function convertProxyURL(url:string){
 export default{
     data:()=>({
         drawer:false,
+        dialog:false,
         group:null,
         page:1,
         length:1,
@@ -73,17 +88,21 @@ export default{
     }),
     watch:{
         group(){
+            //@ts-ignore
             this.drawer=false
         }
     },
     methods:{
         getPageNumber(num:number){
-            axios.get('https://cors-anywhere-taisei-dev.vercel.app/servers.sonolus.com/pjsekai/sonolus/levels/list?page='+this.page)
+            axios.get(convertProxyURL('/sonolus/levels/list?page='+this.page))
             .then(res=>{
                 this.length=res.data.pageCount-1
                 //console.log(res.data.items)
                 this.items=res.data.items
             })
+        },
+        Search(){
+            this.dialog=false
         },
         Game(item:any) {
             store.setLoadConfig(
@@ -104,7 +123,7 @@ export default{
         }
     },
     mounted(){
-        axios.get('https://cors-anywhere-taisei-dev.vercel.app/servers.sonolus.com/pjsekai/sonolus/levels/list')
+        axios.get(convertProxyURL('/sonolus/levels/list'))
         .then(res=>{
             this.length=res.data.pageCount-1
             //console.log(res.data.items)

@@ -13,7 +13,7 @@ export default {
             let game=new BangGame.Game(this.$el,store.GameConfig,store.GameLoadConfig)
             game.start()
             game.ondestroyed=()=>{
-                this.$router.push('/')
+                (this as any).$router.push('/')
             }
         }catch(e){
             console.log(e)

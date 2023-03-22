@@ -29,6 +29,11 @@
 </template>
 
 <script lang="ts">
+// @ts-nocheck
+import { setActivePinia, createPinia } from 'pinia'
+
+setActivePinia(createPinia())
+
 export default{
     data:()=>({
         drawer:false,
